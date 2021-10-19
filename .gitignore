@@ -1,0 +1,8 @@
+*.l#*
+*.s#*
+*.b#*
+*.d#*
+.generated_files/
+build/
+debug/
+dist/
