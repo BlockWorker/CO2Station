@@ -24337,10 +24337,10 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="TP15" library="BW-PassiveMechanical" deviceset="RCU-0" device="(J)">
 <attribute name="TP_SIGNAL_NAME" value="EPD_PDN"/>
 </part>
-<part name="H1" library="BW-Connectors" deviceset="7466313R" device=""/>
-<part name="H2" library="BW-Connectors" deviceset="7466313R" device=""/>
-<part name="H3" library="BW-Connectors" deviceset="7466313R" device=""/>
-<part name="H4" library="BW-Connectors" deviceset="7466313R" device=""/>
+<part name="H1" library="BW-Connectors" deviceset="7466313R" device="" value="MOUNT"/>
+<part name="H2" library="BW-Connectors" deviceset="7466313R" device="" value="MOUNT"/>
+<part name="H3" library="BW-Connectors" deviceset="7466313R" device="" value="MOUNT"/>
+<part name="H4" library="BW-Connectors" deviceset="7466313R" device="" value="MOUNT"/>
 </parts>
 <sheets>
 <sheet>
@@ -25522,9 +25522,8 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 </net>
 <net name="USB_VBUS" class="0">
 <segment>
-<pinref part="C18" gate="G$1" pin="1"/>
-<wire x1="-88.9" y1="-109.22" x2="-88.9" y2="-106.68" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="VCC"/>
+<wire x1="-96.52" y1="-106.68" x2="-88.9" y2="-106.68" width="0.1524" layer="91"/>
 <wire x1="-88.9" y1="-106.68" x2="-66.04" y2="-106.68" width="0.1524" layer="91"/>
 <wire x1="-66.04" y1="-106.68" x2="-66.04" y2="-137.16" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="CE"/>
@@ -25536,11 +25535,14 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="D5" gate="G$1" pin="A"/>
 <wire x1="-50.8" y1="-137.16" x2="-50.8" y2="-154.94" width="0.1524" layer="91"/>
 <pinref part="F2" gate="G$1" pin="2"/>
-<wire x1="-96.52" y1="-106.68" x2="-88.9" y2="-106.68" width="0.1524" layer="91"/>
-<junction x="-88.9" y="-106.68"/>
 <pinref part="TP6" gate="G$1" pin="TP"/>
 <wire x1="-66.04" y1="-104.14" x2="-66.04" y2="-106.68" width="0.1524" layer="91"/>
 <junction x="-66.04" y="-106.68"/>
+<pinref part="C18" gate="G$1" pin="1"/>
+<wire x1="-88.9" y1="-109.22" x2="-88.9" y2="-106.68" width="0.1524" layer="91"/>
+<junction x="-88.9" y="-106.68"/>
+<wire x1="-66.04" y1="-106.68" x2="-63.5" y2="-106.68" width="0.1524" layer="91"/>
+<label x="-63.5" y="-106.68" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="RF7"/>
