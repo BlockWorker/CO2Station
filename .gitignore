@@ -6,3 +6,4 @@
 build/
 debug/
 dist/
+*.mc3.bak*
