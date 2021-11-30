@@ -1183,7 +1183,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="ADC1" registerAlias="ADCON1"/>
-         <value>32880</value>
+         <value>1024</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="ADC1" registerAlias="ADCON2"/>
@@ -1327,7 +1327,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADC1" registerAlias="ADCON1" settingAlias="ADON"/>
-         <value>enabled</value>
+         <value>disabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADC1" registerAlias="ADCON1" settingAlias="ADSIDL"/>
@@ -1355,7 +1355,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADC1" registerAlias="ADCON1" settingAlias="MODE12"/>
-         <value>10-bit</value>
+         <value>12-bit</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADC1" registerAlias="ADCON1" settingAlias="SAMP"/>
@@ -1363,7 +1363,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADC1" registerAlias="ADCON1" settingAlias="SSRC"/>
-         <value>Internal counter ends sampling and starts conversion</value>
+         <value>Clearing sample bit ends sampling and starts conversion</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADC1" registerAlias="ADCON2" settingAlias="ALTS"/>
@@ -4379,7 +4379,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RF7"/>
-         <value/>
+         <value>USB_VBUS</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RG2"/>
@@ -4563,7 +4563,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RF7"/>
-         <value>disabled</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RG2"/>
@@ -4819,7 +4819,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet RF7"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet RG2"/>
@@ -5011,7 +5011,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="ioc RF7"/>
-         <value>none</value>
+         <value>positive</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="ioc RG2"/>
@@ -5203,7 +5203,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="iocUserSet RF7"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="iocUserSet RG2"/>
@@ -8747,7 +8747,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="IOCPDF"/>
-         <value>16</value>
+         <value>144</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="IOCPDG"/>
@@ -8759,7 +8759,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="IOCPF"/>
-         <value>0</value>
+         <value>128</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="IOCPG"/>
@@ -9951,7 +9951,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="IOCPDF" settingAlias="IOCPDF7"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="IOCPDG" settingAlias="IOCPDG2"/>
@@ -10007,7 +10007,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="IOCPF" settingAlias="IOCPF7"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="IOCPG" settingAlias="IOCPG2"/>
@@ -11675,7 +11675,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="SPI1" name="ClockFrequency"/>
-         <value>1000000</value>
+         <value>1000000.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="SPI1" name="DataModeSelect"/>
@@ -13123,7 +13123,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="USB" name="AutoAttach"/>
-         <value>enabled</value>
+         <value>disabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="USB" name="BCDDevice"/>
@@ -13235,7 +13235,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="USB" name="VBUS"/>
-         <value>enabled</value>
+         <value>disabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="USB" name="WakeupHandler"/>
@@ -15433,7 +15433,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
-         <hash>dfecde074ff6ca45ab09d379a0636ecd118802264eabac92fa47337f6fa1971e</hash>
+         <hash>a181021fd07894c4dc65c23166228b7a5d7fe225ac9ca367aaedde1af65e80bf</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\usb\usb_hal.h</file>
@@ -15445,7 +15445,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>5215da03dd02ada49a7dbbc0da241df978ed48fadc24d7794af58566f4b33358</hash>
+         <hash>6ceed8c8eee24cdd2d1248b7e06b1ee45b25fb374f79d1788259dd73a5d540e8</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\usb\usb_hal_16bit.c</file>
@@ -15480,16 +15480,16 @@
          <hash>1d3696dbc0b2ef46f5bb7bcb5a36591a85cf1b9f70d3672fe4442699fbeeb66a</hash>
       </entry>
       <entry>
+         <file>mcc_generated_files\i2c1.h</file>
+         <hash>65cb2de00b6120b2ac8fe924217194e1e8495056109a58ca51661034b70f3c7e</hash>
+      </entry>
+      <entry>
          <file>mcc_generated_files\flash_hardware.h</file>
          <hash>0dec169cc9177e5c5c02ad0cfecba2e04052d1252a9aa9b490c9122a419a4970</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\usb\usb_device_cdc.h</file>
          <hash>d1c0c3f6568521ad1a09882958efbd447ce9214151684496e4342bda482bf789</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\i2c1.h</file>
-         <hash>65cb2de00b6120b2ac8fe924217194e1e8495056109a58ca51661034b70f3c7e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\usb\usb_device_cdc.c</file>
@@ -15513,19 +15513,19 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>7699a5712aa40d63edb3f45e9ef036a23b1e05ab63189f8bde4778157cfa4fa7</hash>
+         <hash>0f5ea25801023b157e030233fa033128c18adde0ad2d49484a381f33e41bebc1</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\dee.h</file>
          <hash>a149d45c7a72e88475a2c01ab3c761571cde0d1894166f84153d45504631945e</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\crc.c</file>
-         <hash>09b9f0f46a4e16689d80fe241788998c7b4724f913230c95d54537cd4f91ba05</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\clock.h</file>
          <hash>8f3a8addb112e0c195797bea005b203ac0f9614acd466a1c1d705722cb908a7e</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\crc.c</file>
+         <hash>09b9f0f46a4e16689d80fe241788998c7b4724f913230c95d54537cd4f91ba05</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\usb\usb_hal_pic24f.h</file>
@@ -15537,7 +15537,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.h</file>
-         <hash>44be6d644d7c8856fd330625a5c7365c90d3af22dffe229e83eecf41c9d4431f</hash>
+         <hash>cad127f1a72c1badc779e026c7bfdfb7793cae8b6ba8aeebb2856c69f6b51c8d</hash>
       </entry>
       <entry>
          <file>main.c</file>
@@ -15545,7 +15545,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\adc1.c</file>
-         <hash>a5d906170467d516c7e854b7822463e74c44e32331cc0326b74f4c13880b3209</hash>
+         <hash>40e6a17c96fd85aacb045342d421c2c792e0c45686d0611b77c1c64240e9fbaf</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\traps.c</file>
@@ -15556,12 +15556,12 @@
          <hash>548593b4db1eeefa2c90dbce04c0b2f5bf332052f0df6d220a59dca86a3aab66</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\adc1.h</file>
-         <hash>0e5c612213e7a5138e50538635541e0cb6ec066d9159cd32877b5443c1e56a64</hash>
+         <file>mcc_generated_files\usb\utilities\mchpcdc_template.inf</file>
+         <hash>cd7c61aba462b9c74bc431d42e29b0e61bd9d187a13a708fb4d5afbbd1733e41</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\usb\utilities\mchpcdc_template.inf</file>
-         <hash>fa2580c881f8ef7560b8b507e57456a0ca71d17122838109833fbdd0064e28fb</hash>
+         <file>mcc_generated_files\adc1.h</file>
+         <hash>0e5c612213e7a5138e50538635541e0cb6ec066d9159cd32877b5443c1e56a64</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\usb\usb_common.h</file>

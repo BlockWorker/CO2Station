@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "scd.h"
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/crc.h"
@@ -12,8 +14,11 @@ uint16_t scd_cal_ref_ppm;
 uint16_t scd_measure_interval_sec;
 uint16_t scd_alt_comp_m;
 uint16_t scd_temp_offset;
+uint16_t scd_sleep_dur_wakeups;
+uint16_t scd_run_dur_wakeups;
 
 scd_state_t scd_state; //State of the module
+bool scd_nvm_initialized; //Whether values stored in SCD NVM have been sent
 
 float scd_co2_ppm; //CO2 concentration of last measurement in ppm, -1 if unknown
 float scd_rh_percent; //Relative humidity of last measurement in %, -1 if unknown
@@ -87,6 +92,7 @@ bool _scd_read(uint16_t* data, uint16_t data_words) {
 
 void SCD_InitDriver() {
     scd_state = SCD_SHUTDOWN;
+    scd_nvm_initialized = false;
     scd_co2_ppm = -1.0f;
     scd_rh_percent = -1.0f;
     scd_temp_deg = -1.0f;
@@ -109,7 +115,7 @@ void SCD_PowerUp() {
     
     DELAY_milliseconds(2000);
     
-    SCD_SendConfig();
+    if (!scd_nvm_initialized) SCD_SendConfig();
     
     scd_state = SCD_CONFIGURED;
 }
@@ -152,7 +158,23 @@ void SCD_SendConfig() {
     success &= _scd_write(0x5102, scd_alt_comp_m, true); //Write altitude compensation
     success &= _scd_write(0x0010, 0, true); //Start continuous measurement, no pressure compensation
     
+    if (success) scd_nvm_initialized = true;
+    
     if (!success) APP_MINOR_ERROR("Error: Failed to configure SCD");
+}
+
+void SCD_ReadOffset() {
+    static uint16_t value = 0;
+    static char buffer[10];
+    
+    if (!APP_USB_Available()) return;
+    
+    _scd_write(0x5403, 0, false);
+    DELAY_milliseconds(5);
+    _scd_read(&value, 1);
+    
+    sprintf(buffer, "%d", value);
+    putsUSBUSART(buffer);
 }
 
 void SCD_TriggerCal() {

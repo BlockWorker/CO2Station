@@ -4,6 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="epd_data" projectFiles="true">
+        <itemPath>font_96px.h</itemPath>
+        <itemPath>font_32px.h</itemPath>
+        <itemPath>background.h</itemPath>
+        <itemPath>font_20px.h</itemPath>
+        <itemPath>bottom_text.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
@@ -40,6 +47,8 @@
       <itemPath>app_util.h</itemPath>
       <itemPath>scd.h</itemPath>
       <itemPath>epd.h</itemPath>
+      <itemPath>battery.h</itemPath>
+      <itemPath>serial_interface.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -87,6 +96,8 @@
       <itemPath>app_util.c</itemPath>
       <itemPath>scd.c</itemPath>
       <itemPath>epd.c</itemPath>
+      <itemPath>battery.c</itemPath>
+      <itemPath>serial_interface.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -95,6 +106,9 @@
       <itemPath>CO2Station.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
@@ -421,6 +435,8 @@
                   value="${communication.interface.default}"/>
         <property key="communication.interface.jtag" value="2wire"/>
         <property key="communication.speed" value="${communication.speed.default}"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.simultaneous.debug" value="false"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="freeze.timers" value="false"/>
@@ -439,8 +455,6 @@
         <property key="memories.programmemory.ranges" value="0-47fff"/>
         <property key="memories.rww" value="true"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/debug/default/default_ptg"/>
         <property key="programmerToGoImageName" value="default_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

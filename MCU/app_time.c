@@ -4,6 +4,8 @@
 #include "mcc_generated_files/rtcc.h"
 #include "scd.h"
 #include "app_util.h"
+#include "battery.h"
+#include "flash_storage.h"
 
 uint16_t wakeup_interval_sec; //MCU wakeup interval in seconds
 uint16_t screen_interval_wakeups; //Screen update interval, in wakeup cycles
@@ -12,17 +14,21 @@ datetime_t next_cal; //Next suggested sensor calibration date, only uses year + 
 uint16_t cal_interval_days; //Suggested sensor calibration interval, in days
 datetime_t standby_start; //Starting time for standby mode, only uses hour + min + sec
 datetime_t standby_end; //End (wakeup) time for standby mode, only uses hour + min + sec
-
-bool readMeasurement = false;
+bool wakeup_by_timer = true;
 
 void Time_OnAlarmInterrupt() {
-    if (!APP_USB_Available()) return;
-    if (!SCD_IsDataReady()) return;
+    static uint16_t seconds_passed = 0;
     
-    readMeasurement = true;
+    seconds_passed += wakeup_interval_sec;
+    if (seconds_passed >= 60) {
+        seconds_passed = 0;
+        FS_SaveTime();
+    }
+    
+    wakeup_by_timer = true;
 }
 
-uint16_t _time_getMonthLengthDays(uint16_t month, uint16_t year) {
+uint16_t Time_GetMonthLengthDays(uint16_t month, uint16_t year) {
     switch (month) {
         case 1:
         case 3:
@@ -45,6 +51,14 @@ uint16_t _time_getMonthLengthDays(uint16_t month, uint16_t year) {
     }
 }
 
+uint8_t Time_GetWeekday(datetime_t* date)
+{
+    static const uint8_t month_offset_table[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+    uint8_t year = date->tm_mon < 3 ? date->tm_year - 1 : date->tm_year;
+    return (date->tm_mday + month_offset_table[date->tm_mon - 1] + year + (year >> 2)) % 7;
+}
+
+
 void Time_CalcNextCal() {
     //get current time+date
     datetime_t time;
@@ -56,14 +70,14 @@ void Time_CalcNextCal() {
     uint16_t day = time.tm_mday + cal_interval_days;
     
     //adjust month/year values to create valid offset date
-    uint16_t current_month_days = _time_getMonthLengthDays(month, year);
+    uint16_t current_month_days = Time_GetMonthLengthDays(month, year);
     while (day > current_month_days) {
         day -= current_month_days;
         if (++month > 12) {
             month = 1;
             year++;
         }
-        current_month_days = _time_getMonthLengthDays(month, year); 
+        current_month_days = Time_GetMonthLengthDays(month, year); 
     }
     
     //set target date
@@ -109,12 +123,40 @@ void Time_DisableAlarm() {
     RTCCON1H = 0;
 }
 
+int8_t _time_compareTime(datetime_t* time1, datetime_t* time2) {
+    int8_t cmp = time1->tm_hour - time2->tm_hour;
+    if (cmp != 0) return cmp;
+    cmp = time1->tm_min - time2->tm_min;
+    if (cmp != 0) return cmp;
+    return time1->tm_sec - time2->tm_sec;
+}
+
+bool Time_IsInStandbyTime() {
+    int8_t stb_compare = _time_compareTime(&standby_start, &standby_end);
+    if (stb_compare == 0) return false; //start and end times identical: never in standby
+    
+    //get current time+date
+    datetime_t time;
+    while (!RTCC_TimeGet(&time));
+    
+    int8_t start_compare = _time_compareTime(&time, &standby_start);
+    int8_t end_compare = _time_compareTime(&time, &standby_end);
+    
+    if (stb_compare < 0) { //start before end: standby if between times
+        return start_compare >= 0 && end_compare < 0;
+    } else { //end before start: standby if outside of times
+        return start_compare >= 0 || end_compare < 0;
+    }
+}
+
 bool Time_IsCalSuggested() {
     //get current time+date
     datetime_t time;
     while (!RTCC_TimeGet(&time));
     
+    if (time.tm_year < next_cal.tm_year) return false;
     if (time.tm_year > next_cal.tm_year) return true;
+    if (time.tm_mon < next_cal.tm_mon) return false;
     if (time.tm_mon > next_cal.tm_mon) return true;
     return time.tm_mday >= next_cal.tm_mday;
 }
@@ -124,9 +166,7 @@ bool Time_HasTimePassed(datetime_t* time) {
     datetime_t curtime;
     while (!RTCC_TimeGet(&curtime));
     
-    if (curtime.tm_hour > time->tm_hour) return true;
-    if (curtime.tm_min > time->tm_min) return true;
-    return curtime.tm_sec >= time->tm_sec;
+    return _time_compareTime(&curtime, time) >= 0;
 }
 
 void Time_MakeFormattable(datetime_t* datetime, datetime_t* result) {
@@ -142,30 +182,8 @@ void Time_MakeFormattable(datetime_t* datetime, datetime_t* result) {
     result->tm_yday = datetime->tm_mday - 1; //add days of current month, though day 0 is expected to be January 1
     uint16_t month;
     for (month = 1; month < datetime->tm_mon; month++) {
-        result->tm_yday += _time_getMonthLengthDays(month, datetime->tm_year);
+        result->tm_yday += Time_GetMonthLengthDays(month, datetime->tm_year);
     }
     
     result->tm_isdst = -1; //DST status unknown
-}
-
-void Time_Tasks() {
-    if (readMeasurement) {
-        static char buffer[128];
-        static datetime_t time;
-        static datetime_t formattable;
-        
-        readMeasurement = false;
-        
-        SCD_ReadMeasurement();
-    
-        while (!RTCC_TimeGet(&time));
-
-        Time_MakeFormattable(&time, &formattable);
-
-        size_t timelen = strftime(buffer, sizeof(buffer), "%c: ", &formattable);
-
-        sprintf(buffer + timelen, "%.1f ppm, %.2f C, %.1f %%RH\n", (double)scd_co2_ppm, (double)scd_temp_deg, (double)scd_rh_percent);
-
-        if (USBUSARTIsTxTrfReady()) putsUSBUSART(buffer);
-    }
 }

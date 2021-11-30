@@ -45,18 +45,20 @@ void _fs_decodeTimeWord(uint16_t word, datetime_t* datetime) {
 void FS_Init() {
     if (DEE_Init() != DEE_NO_ERROR) APP_CRITICAL_ERROR("CRITICAL ERROR: Flash storage corrupt or expired!");
     
-    wakeup_interval_sec = 60;
-    screen_interval_wakeups = 5;
+    wakeup_interval_sec = 30;
+    screen_interval_wakeups = 10;
     battery_interval_wakeups = 10;
     next_cal.tm_year = 0;
     next_cal.tm_mon = next_cal.tm_mday = 1;
     standby_start.tm_hour = standby_start.tm_min = standby_start.tm_sec = 0;
     standby_end.tm_hour = standby_end.tm_min = standby_end.tm_sec = 0;
     cal_interval_days = 21;
-    scd_cal_ref_ppm = 400;
+    scd_cal_ref_ppm = 413;
     scd_measure_interval_sec = 30;
-    scd_alt_comp_m = 0;
+    scd_alt_comp_m = 275;
     scd_temp_offset = 0;
+    scd_sleep_dur_wakeups = 0;
+    scd_run_dur_wakeups = 0;
     
     uint16_t initialized = 0;
     if (DEE_Read(FS_INITIALIZED, &initialized) != DEE_NO_ERROR || initialized != 1) {
@@ -85,6 +87,8 @@ void FS_Init() {
         success &= (DEE_Read(FS_MEASURE_INT, &scd_measure_interval_sec) == DEE_NO_ERROR);
         success &= (DEE_Read(FS_ALT_COMP, &scd_alt_comp_m) == DEE_NO_ERROR);
         success &= (DEE_Read(FS_TEMP_OFFSET, &scd_temp_offset) == DEE_NO_ERROR);
+        success &= (DEE_Read(FS_SCD_SLEEP_DUR, &scd_sleep_dur_wakeups) == DEE_NO_ERROR);
+        success &= (DEE_Read(FS_SCD_RUN_DUR, &scd_run_dur_wakeups) == DEE_NO_ERROR);
         
         if (!success) APP_MINOR_ERROR("Error: Failed to read data from flash storage");
         else {
@@ -157,6 +161,8 @@ bool _fs_saveSCDInfo() {
     success &= (DEE_Write(FS_MEASURE_INT, scd_measure_interval_sec) == DEE_NO_ERROR);
     success &= (DEE_Write(FS_ALT_COMP, scd_alt_comp_m) == DEE_NO_ERROR);
     success &= (DEE_Write(FS_TEMP_OFFSET, scd_temp_offset) == DEE_NO_ERROR);
+    success &= (DEE_Write(FS_SCD_SLEEP_DUR, scd_sleep_dur_wakeups) == DEE_NO_ERROR);
+    success &= (DEE_Write(FS_SCD_RUN_DUR, scd_run_dur_wakeups) == DEE_NO_ERROR);
     return success;
 }
 

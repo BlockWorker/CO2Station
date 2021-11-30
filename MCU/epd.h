@@ -19,6 +19,10 @@ extern "C" {
     void EPD_InitDriver();
     void EPD_StartUpdate();
     void EPD_Update_Tasks();
+    bool EPD_MakeText(uint16_t x, uint16_t y, char* text, uint8_t font_size);
+    void EPD_DrawBackground();
+    void EPD_DrawBottomText(char type);
+    void EPD_DrawLightning();
 
 #ifdef	__cplusplus
 }

@@ -1954,6 +1954,152 @@
 #define EPD_BUSY_N_SetDigitalOutput() (_TRISF4 = 0)
 /**
   @Summary
+    Sets the GPIO pin, RF7, high using LATF7.
+
+  @Description
+    Sets the GPIO pin, RF7, high using LATF7.
+
+  @Preconditions
+    The RF7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RF7 high (1)
+    USB_VBUS_SetHigh();
+    </code>
+
+*/
+#define USB_VBUS_SetHigh()          (_LATF7 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RF7, low using LATF7.
+
+  @Description
+    Sets the GPIO pin, RF7, low using LATF7.
+
+  @Preconditions
+    The RF7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RF7 low (0)
+    USB_VBUS_SetLow();
+    </code>
+
+*/
+#define USB_VBUS_SetLow()           (_LATF7 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RF7, using LATF7.
+
+  @Description
+    Toggles the GPIO pin, RF7, using LATF7.
+
+  @Preconditions
+    The RF7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RF7
+    USB_VBUS_Toggle();
+    </code>
+
+*/
+#define USB_VBUS_Toggle()           (_LATF7 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RF7.
+
+  @Description
+    Reads the value of the GPIO pin, RF7.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RF7
+    postValue = USB_VBUS_GetValue();
+    </code>
+
+*/
+#define USB_VBUS_GetValue()         _RF7
+/**
+  @Summary
+    Configures the GPIO pin, RF7, as an input.
+
+  @Description
+    Configures the GPIO pin, RF7, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RF7 as an input
+    USB_VBUS_SetDigitalInput();
+    </code>
+
+*/
+#define USB_VBUS_SetDigitalInput()  (_TRISF7 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RF7, as an output.
+
+  @Description
+    Configures the GPIO pin, RF7, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RF7 as an output
+    USB_VBUS_SetDigitalOutput();
+    </code>
+
+*/
+#define USB_VBUS_SetDigitalOutput() (_TRISF7 = 0)
+/**
+  @Summary
     Sets the GPIO pin, RG7, high using LATG7.
 
   @Description
@@ -2321,6 +2467,27 @@ void MEASURE_SW_CallBack(void);
 */
 void POWER_SW_CallBack(void);
 
+/**
+  @Summary
+    Callback for USB_VBUS Pin.
+
+  @Description
+    This routine is callback for USB_VBUS Pin
+
+  @Param
+    None.
+
+  @Returns
+    None
+ 
+ 
+  @Example 
+    <code>
+        USB_VBUS_SetInterruptHandler(&USB_VBUS_CallBack);
+    </code>
+*/
+void USB_VBUS_CallBack(void);
+
 
 /**
   @Summary
@@ -2401,6 +2568,46 @@ void POWER_SW_SetInterruptHandler(void (* InterruptHandler)(void));
     </code>
 */
 void __attribute__((deprecated("\nThis will be removed in future MCC releases. \nUse POWER_SW_SetInterruptHandler instead."))) POWER_SW_SetIOCInterruptHandler(void *handler);
+
+/**
+  @Summary
+    Assigns a function pointer with a callback address.
+
+  @Description
+    This routine assigns a function pointer with a callback address.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        USB_VBUS_SetInterruptHandler(&USB_VBUS_CallBack);
+    </code>
+*/
+void USB_VBUS_SetInterruptHandler(void (* InterruptHandler)(void));
+
+/**
+  @Summary
+    Assigns a function pointer with a callback address.
+
+  @Description
+    This routine assigns a function pointer with a callback address.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        USB_VBUS_SetIOCInterruptHandler(&USB_VBUS_CallBack);
+    </code>
+*/
+void __attribute__((deprecated("\nThis will be removed in future MCC releases. \nUse USB_VBUS_SetInterruptHandler instead."))) USB_VBUS_SetIOCInterruptHandler(void *handler);
 
 
 #endif

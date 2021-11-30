@@ -24,7 +24,9 @@ extern "C" {
         FS_CAL_REF = 0x12, //Sensor calibration reference value, in ppm
         FS_MEASURE_INT = 0x13, //Sensor measurement interval, in seconds
         FS_ALT_COMP = 0x14, //Sensor altitude calibration, in meters above sea level
-        FS_TEMP_OFFSET = 0x15 //Sensor temperature offset, in hundredths of degrees C
+        FS_TEMP_OFFSET = 0x15, //Sensor temperature offset, in hundredths of degrees C
+        FS_SCD_SLEEP_DUR = 0x16, //Sensor sleep duration, in wakeup cycles
+        FS_SCD_RUN_DUR = 0x17 //Sensor run duration, in wakeup cycles
     } fs_addr_t;
     
     void FS_Init();

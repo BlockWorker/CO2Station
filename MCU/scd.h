@@ -19,9 +19,11 @@ extern "C" {
     extern uint16_t scd_measure_interval_sec; //Sensor measurement interval, in seconds
     extern uint16_t scd_alt_comp_m; //Sensor altitude calibration, in meters above sea level
     extern uint16_t scd_temp_offset; //Sensor temperature offset, in hundredths of degrees C
+    extern uint16_t scd_sleep_dur_wakeups; //Sensor sleep duration, in wakeup cycles
+    extern uint16_t scd_run_dur_wakeups; //Sensor run duration, in wakeup cycles
     
     extern scd_state_t scd_state; //State of the module
-    extern bool scd_busy; //Whether there is an ongoing data transfer
+    extern bool scd_nvm_initialized; //Whether values stored in SCD NVM have been sent
     
     extern float scd_co2_ppm; //CO2 concentration of last measurement in ppm, -1 if unknown
     extern float scd_rh_percent; //Relative humidity of last measurement in %, -1 if unknown

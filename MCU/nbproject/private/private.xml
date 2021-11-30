@@ -3,9 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/mcc_generated_files/usb/usb_device_cdc.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/scd.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/app_time.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/mcc_generated_files/spi1.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/epd.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/scd.h</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/battery.h</file>
             <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/main.c</file>
-            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/mcc_generated_files/pin_manager.c</file>
-            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/mcc_generated_files/system.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/flash_storage.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/serial_interface.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/battery.c</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/serial_interface.h</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/mcc_generated_files/spi1.h</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/app_util.h</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/app_time.h</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/epd.h</file>
+            <file>file:/E:/Users/Alex/Documents/eagle/projects/CO2Station/MCU/app_util.c</file>
         </group>
     </open-files>
 </project-private>

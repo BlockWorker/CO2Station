@@ -58,6 +58,7 @@
 */
 void (*MEASURE_SW_InterruptHandler)(void) = NULL;
 void (*POWER_SW_InterruptHandler)(void) = NULL;
+void (*USB_VBUS_InterruptHandler)(void) = NULL;
 
 /**
  Section: Driver Interface Function Definitions
@@ -103,7 +104,7 @@ void PIN_MANAGER_Initialize (void)
     IOCPDC = 0x0000;
     IOCPDD = 0x0000;
     IOCPDE = 0x0000;
-    IOCPDF = 0x0010;
+    IOCPDF = 0x0090;
     IOCPDG = 0x0100;
     IOCPUB = 0x0000;
     IOCPUC = 0x0000;
@@ -142,6 +143,10 @@ void PIN_MANAGER_Initialize (void)
     __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
     
     /****************************************************************************
+     * Interrupt On Change: positive
+     ***************************************************************************/
+    IOCPFbits.IOCPF7 = 1;    //Pin : RF7
+    /****************************************************************************
      * Interrupt On Change: negative
      ***************************************************************************/
     IOCNEbits.IOCNE0 = 1;    //Pin : RE0
@@ -151,6 +156,7 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     IOCFEbits.IOCFE0 = 0;    //Pin : RE0
     IOCFEbits.IOCFE1 = 0;    //Pin : RE1
+    IOCFFbits.IOCFF7 = 0;    //Pin : RF7
     /****************************************************************************
      * Interrupt On Change: config
      ***************************************************************************/
@@ -159,6 +165,7 @@ void PIN_MANAGER_Initialize (void)
     /* Initialize IOC Interrupt Handler*/
     MEASURE_SW_SetInterruptHandler(&MEASURE_SW_CallBack);
     POWER_SW_SetInterruptHandler(&POWER_SW_CallBack);
+    USB_VBUS_SetInterruptHandler(&USB_VBUS_CallBack);
     
     /****************************************************************************
      * Interrupt On Change: Interrupt Enable
@@ -173,6 +180,11 @@ void __attribute__ ((weak)) MEASURE_SW_CallBack(void)
 }
 
 void __attribute__ ((weak)) POWER_SW_CallBack(void)
+{
+
+}
+
+void __attribute__ ((weak)) USB_VBUS_CallBack(void)
 {
 
 }
@@ -201,6 +213,18 @@ void POWER_SW_SetIOCInterruptHandler(void *handler)
     POWER_SW_SetInterruptHandler(handler);
 }
 
+void USB_VBUS_SetInterruptHandler(void (* InterruptHandler)(void))
+{ 
+    IEC1bits.IOCIE = 0; //Disable IOCI interrupt
+    USB_VBUS_InterruptHandler = InterruptHandler; 
+    IEC1bits.IOCIE = 1; //Enable IOCI interrupt
+}
+
+void USB_VBUS_SetIOCInterruptHandler(void *handler)
+{ 
+    USB_VBUS_SetInterruptHandler(handler);
+}
+
 /* Interrupt service routine for the IOCI interrupt. */
 void __attribute__ (( interrupt, no_auto_psv )) _IOCInterrupt ( void )
 {
@@ -225,6 +249,17 @@ void __attribute__ (( interrupt, no_auto_psv )) _IOCInterrupt ( void )
             }
             
             IOCFEbits.IOCFE0 = 0;  //Clear flag for Pin - RE0
+
+        }
+        
+        if(IOCFFbits.IOCFF7 == 1)
+        {
+            if(USB_VBUS_InterruptHandler) 
+            { 
+                USB_VBUS_InterruptHandler(); 
+            }
+            
+            IOCFFbits.IOCFF7 = 0;  //Clear flag for Pin - RF7
 
         }
         

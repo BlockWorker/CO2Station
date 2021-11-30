@@ -60,8 +60,8 @@ static void (*ADC1_DefaultInterruptHandler)(void) = NULL;
 
 void ADC1_Initialize (void)
 {
-    // ASAM disabled; DMABM disabled; ADSIDL disabled; DONE disabled; DMAEN disabled; FORM Absolute decimal result, unsigned, right-justified; SAMP disabled; SSRC Internal counter ends sampling and starts conversion; MODE12 10-bit; ADON enabled; 
-    AD1CON1 = 0x8070;
+    // ASAM disabled; DMABM disabled; ADSIDL disabled; DONE disabled; DMAEN disabled; FORM Absolute decimal result, unsigned, right-justified; SAMP disabled; SSRC Clearing sample bit ends sampling and starts conversion; MODE12 12-bit; ADON disabled; 
+    AD1CON1 = 0x400;
     // CSCNA disabled; NVCFG0 AVSS; PVCFG AVDD; ALTS disabled; BUFM disabled; SMPI Generates interrupt after completion of every sample/conversion operation; BUFREGEN disabled; 
     AD1CON2 = 0x00;
     // SAMC 31; EXTSAM disabled; PUMPEN disabled; ADRC FOSC/2; ADCS 255; 

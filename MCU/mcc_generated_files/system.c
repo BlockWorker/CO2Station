@@ -117,15 +117,15 @@
 #include "pin_manager.h"
 #include "clock.h"
 #include "system.h"
-#include "crc.h"
 #include "usb/usb.h"
+#include "i2c1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "adc1.h"
-#include "rtcc.h"
-#include "i2c1.h"
-#include "delay.h"
 #include "spi1.h"
+#include "rtcc.h"
+#include "adc1.h"
+#include "crc.h"
+#include "delay.h"
 
 void SYSTEM_Initialize(void)
 {
@@ -133,7 +133,6 @@ void SYSTEM_Initialize(void)
     INTERRUPT_Initialize();
     CLOCK_Initialize();
     USBDeviceInit();
-    USBDeviceAttach();
     SPI1_Initialize();
     I2C1_Initialize();
     CRC_Initialize();

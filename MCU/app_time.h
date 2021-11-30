@@ -20,20 +20,23 @@ extern "C" {
     extern uint16_t cal_interval_days; //Suggested sensor calibration interval, in days
     extern datetime_t standby_start; //Starting time for standby mode, only uses hour + min + sec
     extern datetime_t standby_end; //End (wakeup) time for standby mode, only uses hour + min + sec
+    extern bool wakeup_by_timer;
     
     
     void Time_OnAlarmInterrupt();
     
+    uint16_t Time_GetMonthLengthDays(uint16_t month, uint16_t year);
+    uint8_t Time_GetWeekday(datetime_t* date);
+    
     void Time_CalcNextCal();
     void Time_SetNextWakeupAlarm();
     void Time_DisableAlarm();
+    bool Time_IsInStandbyTime();
     
     bool Time_IsCalSuggested();
     bool Time_HasTimePassed(datetime_t* time);
     
     void Time_MakeFormattable(datetime_t* datetime, datetime_t* result);
-    
-    void Time_Tasks();
 
 #ifdef	__cplusplus
 }
